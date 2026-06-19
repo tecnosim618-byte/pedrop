@@ -333,6 +333,87 @@
             }
         }
 
+        /* Galería de imágenes */
+        .gallery-section {
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 3px solid #ff69b4;
+            animation: slideUp 0.8s ease-out 1.5s both;
+        }
+
+        .gallery-title {
+            font-size: 28px;
+            color: #1a3a5c;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .gallery-subtitle {
+            font-size: 14px;
+            color: #ff1493;
+            text-align: center;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            animation: fadeIn 0.8s ease-out 2s both;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .gallery-item:nth-child(1) { animation-delay: 2.1s; }
+        .gallery-item:nth-child(2) { animation-delay: 2.2s; }
+        .gallery-item:nth-child(3) { animation-delay: 2.3s; }
+        .gallery-item:nth-child(4) { animation-delay: 2.4s; }
+
+        .gallery-item:hover {
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.4);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.8), rgba(255, 105, 180, 0.8));
+            padding: 15px;
+            color: white;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
         /* Botón de confirmación */
         .confirm-btn {
             position: fixed;
@@ -377,6 +458,54 @@
             50% { box-shadow: 0 10px 50px rgba(255, 20, 147, 0.8); }
         }
 
+        /* Modal para ver imagen completa */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 11000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .modal img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 35px;
+            top: 15px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 11001;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #ff1493;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             body {
@@ -418,6 +547,24 @@
 
             .content {
                 max-width: 100%;
+            }
+
+            .gallery-section {
+                margin-top: 30px;
+                padding: 20px;
+            }
+
+            .gallery-title {
+                font-size: 22px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+            }
+
+            .gallery-item img {
+                height: 180px;
             }
         }
     </style>
@@ -486,6 +633,37 @@
                 <!-- Decoración inferior -->
                 <div class="decoration bottom"></div>
             </div>
+
+            <!-- Galería de imágenes -->
+            <div class="gallery-section">
+                <h2 class="gallery-title">Nuestros Momentos 💕</h2>
+                <p class="gallery-subtitle">Algunos de nuestros mejores recuerdos juntos</p>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-item" onclick="openModal(0)">
+                        <img src="https://raw.githubusercontent.com/tecnosim618-byte/pedrop/main/1.jpeg" alt="Momento 1" loading="lazy">
+                        <div class="gallery-overlay">Momento 1</div>
+                    </div>
+                    <div class="gallery-item" onclick="openModal(1)">
+                        <img src="https://raw.githubusercontent.com/tecnosim618-byte/pedrop/main/2.jpeg" alt="Momento 2" loading="lazy">
+                        <div class="gallery-overlay">Momento 2</div>
+                    </div>
+                    <div class="gallery-item" onclick="openModal(2)">
+                        <img src="https://raw.githubusercontent.com/tecnosim618-byte/pedrop/main/3.jpeg" alt="Momento 3" loading="lazy">
+                        <div class="gallery-overlay">Momento 3</div>
+                    </div>
+                    <div class="gallery-item" onclick="openModal(3)">
+                        <img src="https://raw.githubusercontent.com/tecnosim618-byte/pedrop/main/4.jpeg" alt="Momento 4" loading="lazy">
+                        <div class="gallery-overlay">Momento 4</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para ver imagen completa -->
+        <div id="imageModal" class="modal" onclick="closeModal(event)">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="modalImage" src="" alt="Imagen ampliada">
         </div>
 
         <!-- Botón flotante de confirmación -->
@@ -545,6 +723,36 @@
                 setTimeout(() => confetti.remove(), randomDuration * 1000);
             }
         }
+
+        // Modal functions
+        const images = [
+            'https://raw.githubusercontent.com/tecnosim618-byte/pedrop/main/1.jpeg',
+            'https://raw.githubusercontent.com/tecnosim618-byte/pedrop/main/2.jpeg',
+            'https://raw.githubusercontent.com/tecnosim618-byte/pedrop/main/3.jpeg',
+            'https://raw.githubusercontent.com/tecnosim618-byte/pedrop/main/4.jpeg'
+        ];
+
+        function openModal(index) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = images[index];
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(event) {
+            const modal = document.getElementById('imageModal');
+            if (event && event.target !== modal) return;
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cerrar modal con tecla Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
 
         document.addEventListener('DOMContentLoaded', function() {
             const title = document.querySelector('.title');
